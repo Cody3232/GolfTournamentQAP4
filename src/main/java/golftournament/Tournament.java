@@ -1,4 +1,4 @@
-package com;
+package golftournament;
 
 public class Tournament {
 }
