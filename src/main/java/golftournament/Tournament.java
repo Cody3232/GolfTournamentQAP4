@@ -10,22 +10,23 @@ public class Tournament {
     // Declare Fields
     @Id
     @GeneratedValue
+    @Column(name = "Tournament_ID")
     private int id;
 
-    @Column
+    @Column(name = "Tournament_Start_Date")
     private Date startDate;
 
-    @Column
+    @Column(name = "Tournament_End_Date")
     private Date endDate;
 
-    @Column
+    @Column(name = "Tournament_Location")
     private String location;
 
-    @Column
+    @Column(name = "Tournament_Entry_Fee")
     private double entryFee;
 
-    @Column
-    private double cashPrize; //Might remove from this table? Feels like it should be elsewhere
+    @Column(name = "Cash_Prize")
+    private double cashPrize;
 
     // Many-to-many field
     @ManyToMany

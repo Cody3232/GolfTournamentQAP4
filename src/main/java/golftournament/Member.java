@@ -5,20 +5,21 @@ import java.util.Date;
 
 //Show annotations
 @Entity
-@Table
+@Table(name = "Members")
 public class Member {
     //Declare fields
     @Id // Mark primary key field
     @GeneratedValue // Auto generate ID
+    @Column(name = "Member_ID")
     private int id;
 
-    @Column
+    @Column(name = "Member_Name")
     private String name;
 
-    @Column
+    @Column(name = "Member_Address")
     private String address;
 
-    @Column
+    @Column(name = "Member_Email")
     private String email;
 
     // Constructors (Default for JPA, and with parameters)
