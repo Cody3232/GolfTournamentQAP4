@@ -21,7 +21,7 @@ public class Member {
     @Column
     private String email;
 
-    //Constructors (Default and with fields)
+    // Constructors (Default for JPA, and with parameters)
     public Member() {}
 
     public Member(int id, String name, String address, String email) {
@@ -31,11 +31,11 @@ public class Member {
     }
 
     // Getters/Setters
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
