@@ -29,7 +29,13 @@
             <version>8.0.26</version>
         </dependency>
 
-<!--        &lt;!&ndash; Spring Boot Web starter (for building RESTful APIs) &ndash;&gt;-->
+        <!-- PostgreSQL -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <!--        &lt;!&ndash; Spring Boot Web starter (for building RESTful APIs) &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-starter-web</artifactId>-->
