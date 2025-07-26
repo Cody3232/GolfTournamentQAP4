@@ -2,7 +2,6 @@ package golftournament;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
-import java.util.Date;
 
 public interface MemberRepository extends JpaRepository<Member, Integer> {
     // Search members by name (partial match)
@@ -13,5 +12,4 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 
     // Search members by e-mail
     List<Member> findByEmail(String email);
-
 }
