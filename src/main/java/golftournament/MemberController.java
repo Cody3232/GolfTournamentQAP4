@@ -10,7 +10,7 @@ import java.util.List;
 public class MemberController {
 
     @Autowired
-    private MemberRepository memberRepository; //injects MemberRepository into controller
+    private MemberRepository memberRepository; // Injects MemberRepository into controller
 
     // Get all members
     @GetMapping

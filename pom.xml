@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.8</version>
+        <version>2.7.8</version> <!-- Compatible Spring Boot version -->
     </parent>
 
     <properties>
@@ -26,15 +26,15 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.6.10.Final</version> <!-- Updated version -->
+            <version>5.6.10.Final</version>
         </dependency>
 
         <!-- MySQL Connector to connect to MySQL database -->
-<!--        <dependency>-->
-<!--            <groupId>mysql</groupId>-->
-<!--            <artifactId>mysql-connector-java</artifactId>-->
-<!--            <version>8.0.26</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.26</version>
+        </dependency>
 
         <!-- Spring Boot Web starter (for building RESTful APIs) -->
         <dependency>
@@ -49,12 +49,19 @@
         </dependency>
 
         <!-- H2 Database (for testing, can be replaced with MySQL) -->
+        <!-- Remove or comment this out if you are not using H2 for testing -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.200</version>
             <scope>runtime</scope>
         </dependency>
-    </dependencies>
 
+        <!-- Spring Boot DevTools (Optional, useful for development) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
 </project>
