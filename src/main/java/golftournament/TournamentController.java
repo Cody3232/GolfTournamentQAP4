@@ -8,7 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/tournamnets")
+@RequestMapping("/api/tournaments")
 public class TournamentController {
 
     @Autowired
@@ -18,13 +18,13 @@ public class TournamentController {
     private MemberRepository memberRepository;
 
     // get all tournaments
-    @GetMappingpublic List<Tournament> getAllTournaments(){
+    @GetMapping public List<Tournament> getAllTournaments(){
         return tournamentRepository.findAll();
     }
 
     // Get tournaments through ID
     @GetMapping("/{id}")
-    public tournament getTournamentById(@PathVariable int id){
+    public Tournament getTournamentById(@PathVariable int id){
         return tournamentRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tournament not found"));
     }
@@ -35,11 +35,23 @@ public class TournamentController {
         return tournamentRepository.save(tournament);
     }
 
+    // Add a memeber to the tournament
+    @PutMapping("/{tournamentId}/addMember/{memberId}")
+    public Tournament addMemberToTournament(@PathVariable int tournamentId, @PathVariable int memberId) {
+        Tournament tournament = tournamentRepository.findById(tournamentId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tournament not found"));
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found"));
+        if (!tournament.getMembers().contains(member)) {
+            tournament.getMembers().add(member);
+        }
+        return tournamentRepository.save(tournament);
+    }
+
     // Get all members in a tournament
     @GetMapping("/{id}/members")
     public List<Member> getTournamentMembers(@PathVariable int id) {
-        Tournament tournament = tournamentRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tournament not found"));
+        Tournament tournament = tournamentRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tournament not found"));
         return tournament.getMembers();
     }
 

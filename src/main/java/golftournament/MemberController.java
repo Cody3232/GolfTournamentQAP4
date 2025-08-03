@@ -8,30 +8,16 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/members") // Base URL for members
+@RequestMapping("/api/members")
 public class MemberController {
 
     @Autowired
-    private MemberRepository memberRepository; // Injects MemberRepository into controller
+    private MemberRepository memberRepository;
 
     // Get all members
     @GetMapping
     public List<Member> getAllMembers() {
         return memberRepository.findAll();
-    }
-
-    // Get a member by ID
-    @GetMapping("/{id}")
-    public Member getMemberById(@PathVariable int id) {
-        // Improved error handling: return 404 if member not found
-        return memberRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found"));
-    }
-
-    // Search members by name (partial match)
-    @GetMapping("/searchByName")
-    public List<Member> searchMembersByName(@RequestParam String name) {
-        return memberRepository.findByNameContaining(name);
     }
 
     // Add a new member
@@ -45,12 +31,9 @@ public class MemberController {
     public Member updateMember(@PathVariable int id, @RequestBody Member updatedMember) {
         Member existingMember = memberRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found"));
-
-        // Update existing member's details
         existingMember.setName(updatedMember.getName());
         existingMember.setEmail(updatedMember.getEmail());
         existingMember.setPhoneNumber(updatedMember.getPhoneNumber());
-        // Add other fields if needed
         return memberRepository.save(existingMember);
     }
 
@@ -61,5 +44,35 @@ public class MemberController {
                 member -> memberRepository.delete(member),
                 () -> { throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found"); }
         );
+    }
+
+    // Search members by name
+    @GetMapping("/searchByName")
+    public List<Member> searchMembersByName(@RequestParam String name) {
+        return memberRepository.findByNameContaining(name);
+    }
+
+    // Search members by phone number
+    @GetMapping("/searchByPhoneNumber")
+    public List<Member> searchByPhoneNumber(@RequestParam String phoneNumber) {
+        return memberRepository.findByPhoneNumber(phoneNumber);
+    }
+
+    // Search members by email
+    @GetMapping("/searchByEmail")
+    public List<Member> searchByEmail(@RequestParam String email) {
+        return memberRepository.findByEmail(email);
+    }
+
+    // Search members by start date
+    @GetMapping("/searchByStartDate")
+    public List<Member> searchByStartDate(@RequestParam String date) {
+        return memberRepository.findByStartDateString(date);
+    }
+
+    @GetMapping("/{id}")
+    public Member getMemberById(@PathVariable int id) {
+        return memberRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found"));
     }
 }
